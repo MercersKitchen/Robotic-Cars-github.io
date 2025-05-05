@@ -119,21 +119,26 @@ void updateObstacleAvoidance() {
 // Updates line tracking logic
 void updateLineTracking() {
   u8 trackingSensorVal = getTrackingSensorVal();
-  switch (trackingSensorVal) {
-    case 0:   // 000 - Move Forward
-      motorRun(TK_FORWARD_SPEED, TK_FORWARD_SPEED);
-      break;
+  switch (trackingSensorVal) { //1 is non they are backwards
     case 7:   // 111 - Stop
-      motorRun(TK_STOP_SPEED, TK_STOP_SPEED);
+      motorRun(TK_FORWARD_SPEED, TK_FORWARD_SPEED);
+    break;
+    case 3:   // 011 - Turn Right
+      motorRun(TK_TURN_SPEED, -TK_TURN_SPEED);
       break;
     case 1:   // 001 - Turn Right
       motorRun(TK_TURN_SPEED, -TK_TURN_SPEED);
       break;
-    case 4:   // 100 - Turn Left
+    case 6:   // 110 - Turn Left
       motorRun(-TK_TURN_SPEED, TK_TURN_SPEED);
       break;
-    default:  // Default to Forward
+    case 4:   // 100 - Turn Left
+      motorRun(-TK_TURN_SPEED,TK_TURN_SPEED);
+      break;
+    case 2 :
       motorRun(TK_FORWARD_SPEED, TK_FORWARD_SPEED);
+    default:  // Default to Forward
+      motorRun(TK_STOP_SPEED, TK_STOP_SPEED);
       break;
   }
 }
