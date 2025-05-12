@@ -19,7 +19,7 @@
 #define OBSTACLE_DISTANCE       40
 #define OBSTACLE_DISTANCE_LOW   15
 #define LINE_TRACKING_THRESHOLD 7
-#define TK_FORWARD_SPEED        90
+#define TK_FORWARD_SPEED        50
 #define TK_TURN_SPEED           180
 #define TK_STOP_SPEED           0
 #define OA_SCAN_ANGLE_MIN       30
@@ -123,17 +123,20 @@ void updateLineTracking() {
     case 7:   // 111 - Stop
       motorRun(TK_FORWARD_SPEED, TK_FORWARD_SPEED);
     break;
+    case 0:
+      motorRun(-TK_FORWARD_SPEED, -TK_FORWARD_SPEED);
+    break;
     case 3:   // 011 - Turn Right
-      motorRun(TK_TURN_SPEED, -TK_TURN_SPEED);
-      break;
-    case 1:   // 001 - Turn Right
-      motorRun(TK_TURN_SPEED, -TK_TURN_SPEED);
-      break;
-    case 6:   // 110 - Turn Left
       motorRun(-TK_TURN_SPEED, TK_TURN_SPEED);
       break;
+    case 1:   // 001 - Turn Right
+      motorRun(-TK_TURN_SPEED, TK_TURN_SPEED);
+      break;
+    case 6:   // 110 - Turn Left
+      motorRun(TK_TURN_SPEED, -TK_TURN_SPEED);
+      break;
     case 4:   // 100 - Turn Left
-      motorRun(-TK_TURN_SPEED,TK_TURN_SPEED);
+      motorRun(TK_TURN_SPEED, -TK_TURN_SPEED);
       break;
     case 2 :
       motorRun(TK_FORWARD_SPEED, TK_FORWARD_SPEED);
